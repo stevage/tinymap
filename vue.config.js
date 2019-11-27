@@ -3,7 +3,8 @@ module.exports = {
     baseUrl: '',
     devServer: {
         historyApiFallback: false
-    }, configureWebpack: {
+    }, 
+    configureWebpack: {
         plugins: [
             new CopyWebpackPlugin([
                 {
@@ -15,5 +16,6 @@ module.exports = {
                 }
             ])
         ]
-    }  
+    },
+    chainWebpack: config => config.resolve.symlinks(false)
 };

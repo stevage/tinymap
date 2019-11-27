@@ -1,10 +1,10 @@
 <template lang="pug">
     #app.flex.flex-column.vh-100.avenir
         #top.bb.b--gray.bg-washed-yellow.h3
-            h1 Title
+            h1 Community Map
         #middle.flex.flex-auto
             #sidebar.br.b--light-gray.overflow-auto.w3.w5-ns
-                .b.i Hello                
+                .b.i See the README for tips on customising.              
             #map-container.relative.flex-auto
                 Map
                 #overlay.absolute
