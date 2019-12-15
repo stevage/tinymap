@@ -1,5 +1,5 @@
 <template lang="pug">
-#NewFeature.mt5
+#NewFeature.mt5(v-show="show")
     p(v-if="mode==='locating'") Click to locate the new item on the map.
     button.f6.link.dim.ph3.pv2.mb2.dib.white.bg-purple(@click="clickAdd" v-if="mode === ''") New item
     div.ba.pa2.b--mid-gray(v-if="mode === 'confirming'")
@@ -17,8 +17,9 @@
 
 <script>
 import { EventBus } from './EventBus';
-import { addPointUrl } from './sharedMapApi';
+import { addPointUrl, layer } from './sharedMapApi';
 import axios from 'axios';
+
 export default {
     name: "NewFeature",
     data: () => ({
@@ -36,6 +37,9 @@ export default {
         });
     },
     computed: {
+        show() {
+            return !!layer;
+        }
     },
     methods: {
         clickAdd() {

@@ -1,7 +1,7 @@
 <template lang="pug">
     #app.flex.flex-column.vh-100.avenir
-        #top.bb.b--gray.bg-washed-blue.h3
-            h1 Shared Map Experiment
+        #top.bb.b--gray.bg-washed-blue.h3.pa1
+            h1.f1.ma1 TinyMap
         #middle.flex.flex-auto
             #sidebar.br.b--light-gray.overflow-auto
                 Settings
@@ -10,7 +10,14 @@
             #map-container.relative.flex-auto
                 Map
                 #overlay.absolute
-        #bottom.bt.b--light-gray.flex-none.h2
+        #bottom.bt.b--light-gray.flex-none.h3.lh-solid.pa1
+            p.ma0
+                b Disclaimer: 
+                | Do not use this site for anything private or important. There is no security. Your data may be deleted without warning. Absolutely no warranty of any kind.
+            p Created by 
+                a(href="https://twitter.com/stevage1") Steve Bennett
+                | .  
+                a(href="https://github.com/stevage/shared-map") Source code on Github.
 </template>
 
 <script>
