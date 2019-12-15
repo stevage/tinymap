@@ -9,9 +9,13 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.19.0",
+    "cheap-ruler": "^2.5.1",
     "d3-fetch": "^1.1.2",
+    "geojson-bounds": "^1.0.2",
     "mapbox-gl": "^1.1.0",
     "mapbox-gl-utils": "^0.25.0",
+    "urijs": "^1.19.2",
     "vue": "^2.5.21"
   },
   "devDependencies": {

@@ -16,8 +16,17 @@ This project starts using data in https://docs.google.com/spreadsheets/d/1DFXQYO
 2. Under File, "Publish to the web", as CSV.
 3. Put the CSV link in Map.vue.
 
+### Special columns
 
-### Running locally
+The template recognises certain column names by default. Obviously you can change these in the code.
+
+* `Longitude`, `Latitude`
+* `Name`: title of feature info panel
+* `Description`: smaller text in feature info panel
+* `Image_Url`: 
+
+
+## Running locally
 ```
 npm run serve
 ```
