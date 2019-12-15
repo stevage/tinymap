@@ -1,7 +1,9 @@
 <template lang="pug">
     #app.flex.flex-column.vh-100.avenir
         #top.bb.b--gray.bg-washed-blue.h3.pa1
-            h1.f1.ma1 TinyMap
+            img.logo.fl.mh2(src="butterfly.svg")
+            h1.f1.ma1 
+                | TinyMap
         #middle.flex.flex-auto
             #sidebar.br.b--light-gray.overflow-auto
                 Settings
@@ -17,7 +19,7 @@
             p Created by 
                 a(href="https://twitter.com/stevage1") Steve Bennett
                 | .  
-                a(href="https://github.com/stevage/shared-map") Source code on Github.
+                a(href="https://github.com/stevage/tinymap") Source code on Github.
 </template>
 
 <script>
@@ -50,5 +52,8 @@ html, body {
     width: 20rem;
 }
 
+.logo {
+    height: 50px;
+}
 
 </style>
