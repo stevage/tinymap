@@ -2,7 +2,7 @@
 div.b--black.ba.pa2(v-show="feature")
     h3.f4 {{ p.name || '(Unnamed item)' }}
     p {{ p.description || '(No description)'}}
-    button.tr.mv2.mr2.f6.link.dim.ph3.pv2.mb2.white.bg-purple.ml-auto.db(@click="clickDelete") 
+    button.tr.mv2.mr2.f6.link.dim.ph3.pv2.mb2.white.bg-purple.ml-auto.db(@click="clickDelete" v-show="canEdit()") 
         //- .icono-cross
         | Delete
 
@@ -18,6 +18,7 @@ div.b--black.ba.pa2(v-show="feature")
 <script>
 import { EventBus } from './EventBus';
 import { deletePointUrl } from './sharedMapApi';
+import { canEdit } from './sharedMapApi';
 import axios from 'axios';
 export default {
     name: "FeatureInfo",
@@ -31,7 +32,8 @@ export default {
         },
         imageUrl() {
             return this.p.image_url || ''
-        }
+        },
+        
     },
     created() {
         window.FeatureInfo = this;
@@ -41,6 +43,7 @@ export default {
         });
     },
     methods: {
+        canEdit,
         async clickDelete() {
             console.log('Deleting ', this.feature.id);
             await axios.delete(`${deletePointUrl(this.feature.id)}`);

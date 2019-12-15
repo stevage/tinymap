@@ -10,14 +10,12 @@
         br
         button.mv2.mr2.f6.link.dim.ph3.pv2.mb2.dib.white.bg-purple(@click="clickSave") Save
         button.f6.link.dim.ph3.pv2.mb2.dib.white.bg-gray(@click="clickCancel") Cancel
-
-
     button.f6.link.dim.ph3.pv2.mb2.dib.white.bg-gray(@click="clickCancel" v-if="mode === 'locating'") Cancel
 </template>
 
 <script>
 import { EventBus } from './EventBus';
-import { addPointUrl, layer } from './sharedMapApi';
+import { addPointUrl, layer, canEdit } from './sharedMapApi';
 import axios from 'axios';
 
 export default {
@@ -38,7 +36,7 @@ export default {
     },
     computed: {
         show() {
-            return !!layer;
+            return canEdit();
         }
     },
     methods: {

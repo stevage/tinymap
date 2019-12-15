@@ -1,6 +1,6 @@
 <template lang="pug">
     #app.flex.flex-column.vh-100.avenir
-        #top.bb.b--gray.bg-washed-blue.h3.pa1
+        #top.bb.b--gray.bg-lightest-blue.h3.pa1
             img.logo.fl.mh2(src="butterfly.svg")
             h1.f1.ma1 
                 | TinyMap
@@ -12,7 +12,7 @@
             #map-container.relative.flex-auto
                 Map
                 #overlay.absolute
-        #bottom.bt.b--light-gray.flex-none.h3.lh-solid.pa1
+        #bottom.bt.b--light-gray.flex-none.h3.lh-solid.pa1.bg-washed-blue
             p.ma0
                 b Disclaimer: 
                 | Do not use this site for anything private or important. There is no security. Your data may be deleted without warning. Absolutely no warranty of any kind.

@@ -16,7 +16,7 @@
         input#newlayer.f6.gray(v-model="newLayer" placeholder="awesome-cafes")
 
         label.b.f5.mt3.db SecretKey
-        p.dark-gray.f7.i.mv0 Share this with anyone you trust to edit.
+        p.dark-gray.f7.i.mv0 Share this with anyone who should be able to edit.
         input#newkey.f7.gray(v-model="newSecretKey" placeholder="l4ttesNbr0wn1es")
 
         button.mv2.mr2.f6.link.dim.ph3.pv2.mb2.dib.white.bg-purple(@click="clickCreate") Create My Map
