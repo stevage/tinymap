@@ -48,8 +48,16 @@ html, body {
   padding:0;
 }
 
-#sidebar {
-    width: 20rem;
+@media (min-width: 800px) {
+
+    #sidebar {
+        width: 20rem;
+    }
+}
+@media only screen and (max-width: 800px) {
+    #sidebar {
+        width: 12rem;
+    }
 }
 
 .logo {
