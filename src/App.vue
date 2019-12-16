@@ -16,7 +16,7 @@
             #sidebar-rim.relative.br.b--gray.bw2(v-show="!sidebarOpen"  style="width:20px" @click="sidebarOpen = true")
             #map-container.relative.flex-auto
                 Map
-                #sidebarToggle.absolute.bg-white.f3.br.bt.bb.br--right.br-100.b--magenta.bw1.magenta.pa1.pointer.grow.pa0(@click="toggleSidebar")
+                #sidebarToggle.absolute.bg-white.f3.br.bt.bb.br--right.br-100.b--magenta.bw1.mt3.magenta.pointer.grow.pa1(@click="toggleSidebar")
                   span(v-if="!sidebarOpen")
                     .icono-caretRight.ml0
                   span(v-if="sidebarOpen") 
@@ -38,6 +38,8 @@ import Map from './components/Map.vue'
 import FeatureInfo from './components/FeatureInfo.vue'
 import NewFeature from './components/NewFeature.vue'
 import Settings from './components/Settings.vue'
+import { EventBus } from './components/EventBus';
+
 export default {
     name: 'app',
     components: {
@@ -58,6 +60,8 @@ export default {
       toggleSidebar() {
         this.sidebarOpen = !this.sidebarOpen;
       }
+    }, created() {
+        EventBus.$on('select-feature', feature => this.sidebarOpen = true);
     }
 
 }

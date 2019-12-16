@@ -3,10 +3,13 @@
     p(v-if="mode==='locating'") Click to locate the new item on the map.
     button.f6.link.dim.ph3.pv2.mb2.dib.white.bg-purple(@click="clickAdd" v-if="mode === ''") New item
     .ba.pa2.b--mid-gray.bg-white(v-if="mode === 'confirming'")
-        label.f5.mb1.db Name
-        input.input-reset(v-model="feature.properties.name")
-        label.f5.mb1.mt3.db Description
-        textarea.input-reset(v-model="feature.properties.description")
+        template(v-for="field in fields")
+            label.f5.mb1.db {{ field.title }}
+
+            input.input-reset.mb3(v-if="field.type === 'text'" v-model="feature.properties[field.property]")
+            textarea.input-reset.mb3(v-if="field.type === 'textarea'" v-model="feature.properties[field.property]")
+            //- label.f5.mb1.mt3.db Description
+            //- textarea.input-reset(v-model="feature.properties.description")
         br
         button.mv2.mr2.f6.link.dim.ph3.pv2.mb2.dib.white.bg-purple(@click="clickSave") Save
         button.f6.link.dim.ph3.pv2.mb2.dib.white.bg-gray(@click="clickCancel") Cancel
@@ -23,21 +26,27 @@ export default {
     data: () => ({
         mode: '',
         feature: {},
+        fields: [
+            { title: 'Name', property: 'name', type: 'text' },
+            { title: 'Description', property: 'description', type: 'textarea' },
+        ]
     }),
     created() {
         window.NewFeature = this;
         EventBus.$on('Map-clickLocate', lngLat => {
-            this.feature = {
+            const feature = {
                 type: 'Feature',
                 properties: {
-                    name: '',
-                    description: ''
                 },
                 geometry: {
                     type: 'Point',
                     coordinates: [lngLat.lng, lngLat.lat]
                 },
             };
+            for (const field of this.fields) {
+                feature.properties[field.property] = ''
+            };
+            this.feature = feature;
             this.mode = 'confirming'
         });
         EventBus.$on('edit-feature', feature => {
@@ -76,7 +85,7 @@ export default {
                     console.log('updated', this.feature);
                 } // else error?
             } else {
-                const savedFeature = (await axios.post(addFeatureUrl, this.feature)).data[0]
+                const savedFeature = (await axios.post(addFeatureUrl, this.feature)).data
                 EventBus.$emit('NewFeature-saved', savedFeature);
                 console.log('saved', savedFeature);
             }
