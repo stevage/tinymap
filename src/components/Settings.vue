@@ -21,6 +21,12 @@
 
         button.mv2.mr2.f6.link.dim.ph3.pv2.mb2.dib.white.bg-purple(@click="clickCreate") Create My Map
     template(v-else)
+        p.lh-copy.f7.dark-gray Download as 
+            a.underline.link.dim.black(:href="geoJSONUrl") GeoJSON
+            |  or 
+            a.underline.link.dim.black(:href="csvUrl") CSV
+            | .
+
         button.mt4.mb2.mr2.f6.link.dim.ph3.pv2.dib.white.bg-blue(@click="clickNew") Start over with new map
 
 
@@ -28,6 +34,7 @@
 
 <script>
 import URI from 'urijs';
+import { getPointsGeoJSONUrl, getPointsCsvUrl } from './sharedMapApi';
 export default {
     name: "Settings",
     data: () => ({
@@ -43,7 +50,9 @@ export default {
         secretkey: () => (window.location.search.match(/secretkey=([a-zA-Z0-9_-]+)/) || [])[1],
 
         readOnlyUrl: () => new URI(window.location).removeQuery('secretkey').toString(),
-        collaborationUrl: () => new URI(window.location).toString()
+        collaborationUrl: () => new URI(window.location).toString(),
+        csvUrl: () => getPointsCsvUrl,
+        geoJSONUrl: () => getPointsGeoJSONUrl,
     },
     methods: {
         clickCreate() {
