@@ -2,7 +2,10 @@
 div.b--black.ba.pa2(v-show="feature")
     h3.f4 {{ p.name || '(Unnamed item)' }}
     p {{ p.description || '(No description)'}}
-    button.tr.mv2.mr2.f6.link.dim.ph3.pv2.mb2.white.bg-purple.ml-auto.db(@click="clickDelete" v-show="canEdit()") 
+    button.tr.mv2.mr2.f6.link.dim.ph3.pv2.mb2.white.bg-purple.ml-auto(@click="clickEdit" v-show="canEdit()") 
+        //- .icono-rename
+        | Edit
+    button.tr.mv2.mr2.f6.link.dim.ph3.pv2.mb2.white.bg-blue.ml-auto(@click="clickDelete" v-show="canEdit()") 
         //- .icono-cross
         | Delete
 
@@ -17,7 +20,7 @@ div.b--black.ba.pa2(v-show="feature")
 
 <script>
 import { EventBus } from './EventBus';
-import { deletePointUrl } from './sharedMapApi';
+import { deleteFeatureUrl } from './sharedMapApi';
 import { canEdit } from './sharedMapApi';
 import axios from 'axios';
 export default {
@@ -44,9 +47,15 @@ export default {
     },
     methods: {
         canEdit,
+        async clickEdit() {
+            console.log('Editing ', this.feature);
+            // await axios.delete(`${deleteFeatureUrl(this.feature.id)}`);
+            EventBus.$emit('edit-feature', this.feature);
+            // this.feature = undefined;
+        },
         async clickDelete() {
             console.log('Deleting ', this.feature.id);
-            await axios.delete(`${deletePointUrl(this.feature.id)}`);
+            await axios.delete(`${deleteFeatureUrl(this.feature.id)}`);
             EventBus.$emit('delete-feature', this.feature.id);
             this.feature = undefined;
         }

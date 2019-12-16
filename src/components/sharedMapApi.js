@@ -7,5 +7,7 @@ const keyFragment = secretkey ? `?key=${secretkey}` : '';
 console.log(layer);
 
 export const getPointsUrl = `https://shared-map-api.glitch.me/layer/${layer}${keyFragment}`;
-export const addPointUrl = `https://shared-map-api.glitch.me/layer/${layer}${keyFragment}`;
-export const deletePointUrl = id => `https://shared-map-api.glitch.me/layer/${layer}/${id}${keyFragment}`;
+export const addFeatureUrl = `https://shared-map-api.glitch.me/layer/${layer}${keyFragment}`;
+
+export const updateFeatureUrl = id => `https://shared-map-api.glitch.me/layer/${layer}/${id}${keyFragment}`;
+export const deleteFeatureUrl = id => `https://shared-map-api.glitch.me/layer/${layer}/${id}${keyFragment}`;

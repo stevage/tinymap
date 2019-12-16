@@ -86,6 +86,10 @@ export default {
                 this.points.features = this.points.features.filter(f => f.id !== id);
                 map.U.setData('points', this.points);
             });        
+            EventBus.$on('update-feature', feature => {
+                Object.assign(this.points.features.find(f => f.id === feature._id), feature);
+                map.U.setData('points', this.points);
+            });        
 
             if (layer) {
                 this.points = (await axios.get(getPointsUrl)).data;
