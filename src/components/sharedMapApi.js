@@ -1,3 +1,4 @@
+import axios from 'axios';
 export const layer  = (window.location.search.match(/layer=([a-zA-Z0-9_-]+)/) || [])[1];
 export const secretkey = (window.location.search.match(/secretkey=([a-zA-Z0-9_-]+)/) || [])[1];
 
@@ -13,3 +14,19 @@ export const addFeatureUrl = `https://shared-map-api.glitch.me/layer/${layer}${k
 
 export const updateFeatureUrl = id => `https://shared-map-api.glitch.me/layer/${layer}/${id}${keyFragment}`;
 export const deleteFeatureUrl = id => `https://shared-map-api.glitch.me/layer/${layer}/${id}${keyFragment}`;
+
+export async function saveFeature(feature) {
+    return (await axios.post(addFeatureUrl, feature)).data;
+}
+
+export async function updateFeature(feature) {
+    return (await axios.put(updateFeatureUrl(feature._id), feature)).data
+}
+
+export async function getFeatures() {
+    return (await axios.get(getPointsUrl)).data;
+}
+
+export async function deleteFeature(feature) {
+    return (await axios.delete(`${deleteFeatureUrl(feature.id)}`));
+}

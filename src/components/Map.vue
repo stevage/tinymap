@@ -5,10 +5,9 @@
 <script>
 import mapboxgl from 'mapbox-gl';
 import U from 'mapbox-gl-utils';
-import axios from 'axios';
 
 import { EventBus } from './EventBus';
-import { getPointsUrl, layer } from './sharedMapApi';
+import { getFeatures, layer } from './sharedMapApi';
 import boundingBox from 'geojson-bounding-box';
 export default {
     data: () => ({
@@ -105,10 +104,10 @@ export default {
             });        
 
             if (layer) {
-                this.points = (await axios.get(getPointsUrl)).data;
+                this.points = await getFeatures();
 
                 if (this.points) {
-                    map.fitBounds(boundingBox(this.points), { padding: 20 });
+                    map.fitBounds(boundingBox(this.points), { padding: 60 });
                 }
                 map.U.setData('points', this.points);
             }

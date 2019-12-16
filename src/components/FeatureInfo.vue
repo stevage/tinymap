@@ -20,7 +20,7 @@
 
 <script>
 import { EventBus } from './EventBus';
-import { deleteFeatureUrl } from './sharedMapApi';
+import { deleteFeature } from './sharedMapApi';
 import { canEdit } from './sharedMapApi';
 import axios from 'axios';
 export default {
@@ -56,13 +56,11 @@ export default {
         canEdit,
         async clickEdit() {
             console.log('Editing ', this.feature);
-            // await axios.delete(`${deleteFeatureUrl(this.feature.id)}`);
             EventBus.$emit('edit-feature', this.feature);
-            // this.feature = undefined;
         },
         async clickDelete() {
             console.log('Deleting ', this.feature.id);
-            await axios.delete(`${deleteFeatureUrl(this.feature.id)}`);
+            await deleteFeature(this.feature);
             EventBus.$emit('delete-feature', this.feature.id);
             this.feature = undefined;
         }

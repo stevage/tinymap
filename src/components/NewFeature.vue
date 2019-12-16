@@ -18,8 +18,7 @@
 
 <script>
 import { EventBus } from './EventBus';
-import { addFeatureUrl, updateFeatureUrl, layer, canEdit } from './sharedMapApi';
-import axios from 'axios';
+import { saveFeature, updateFeature, layer, canEdit } from './sharedMapApi';
 
 export default {
     name: "NewFeature",
@@ -79,18 +78,16 @@ export default {
             if (this.feature.id) {
                 this.feature._id = this.feature.id;
                 delete(this.feature.id);
-                const success = (await axios.put(updateFeatureUrl(this.feature._id), this.feature)).data;
-                if (success) {
+                if (await updateFeature(this.feature)) {
                     EventBus.$emit('update-feature', this.feature);
                     console.log('updated', this.feature);
                 } // else error?
             } else {
-                const savedFeature = (await axios.post(addFeatureUrl, this.feature)).data
+                const savedFeature = (await saveFeature(this.feature));
                 EventBus.$emit('NewFeature-saved', savedFeature);
                 console.log('saved', savedFeature);
             }
         },
-        
     },
     watch: {
         mode() {

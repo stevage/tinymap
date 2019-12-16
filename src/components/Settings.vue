@@ -72,8 +72,13 @@ input {
 }
 
 .collapsed #Settings {
-    display: none;
+    /* display: none; */
 }
+
+.collapsed #Settings * {
+    /* display: none; */
+}
+
 
 /* #newLayer::placeholder */
 
