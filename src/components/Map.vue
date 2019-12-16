@@ -12,7 +12,8 @@ import { getPointsUrl, layer } from './sharedMapApi';
 import boundingBox from 'geojson-bounding-box';
 export default {
     data: () => ({
-        points: undefined
+        points: undefined,
+        selectedId: undefined
     }),
     async mounted() {
         // replace this Mapbox access token with your own
@@ -32,7 +33,11 @@ export default {
             map.U.addCircle('points-circles', 'points', {
                 circleColor: 'hsl(330,100%,70%)',
                 circleStrokeColor: 'hsl(330,100%,40%)',
-                circleStrokeWidth: 3,
+                // circleStrokeWidth: 3,
+                circleStrokeWidth: ['case',
+                    ['to-boolean', ["feature-state", "selected"]], 8,
+                    3],
+
                 circleRadius: { stops: [[10,3], [12, 10]] }
             });
             map.U.addSymbol('points-labels', 'points', {
@@ -89,6 +94,14 @@ export default {
             EventBus.$on('update-feature', feature => {
                 Object.assign(this.points.features.find(f => f.id === feature._id), feature);
                 map.U.setData('points', this.points);
+            });        
+            EventBus.$on('select-feature', feature => {
+                if (this.selectedId) {
+                    map.setFeatureState({ source: 'points', id: this.selectedId }, { selected: false });
+                }
+                this.selectedId = feature.id;
+
+                map.setFeatureState({ source: 'points', id: feature.id }, { selected: true });
             });        
 
             if (layer) {

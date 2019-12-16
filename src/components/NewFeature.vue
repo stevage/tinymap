@@ -2,7 +2,7 @@
 #NewFeature.mt5(v-show="show")
     p(v-if="mode==='locating'") Click to locate the new item on the map.
     button.f6.link.dim.ph3.pv2.mb2.dib.white.bg-purple(@click="clickAdd" v-if="mode === ''") New item
-    div.ba.pa2.b--mid-gray(v-if="mode === 'confirming'")
+    .ba.pa2.b--mid-gray.bg-white(v-if="mode === 'confirming'")
         label.f5.mb1.db Name
         input.input-reset(v-model="feature.properties.name")
         label.f5.mb1.mt3.db Description

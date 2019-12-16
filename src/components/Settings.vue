@@ -62,6 +62,10 @@ input {
     width: calc(100% - 1em);
 }
 
+.collapsed #Settings {
+    display: none;
+}
+
 /* #newLayer::placeholder */
 
 </style>
