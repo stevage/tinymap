@@ -1,9 +1,14 @@
 <template lang="pug">
     #app.flex.flex-column.vh-100.avenir
-        #top.bb.b--gray.bg-lightest-blue.pa1
-            img.logo.fl.mh2(src="butterfly.svg")
-            h1.f1.ma1 
+        #top.bb.b--gray.bg-lightest-blue.pa1.flex
+            img.logo.mh2(src="butterfly.svg")
+            h1.f1.ma1.flex-auto 
                 | TinyMap
+            div(v-if="!$auth.loading")
+              button(v-if="!$auth.isAuthenticated" @click="login") Log in
+              button(v-if="$auth.isAuthenticated" @click="logout") Log out
+
+            
         #middle.flex.flex-auto
             #sidebar.br.b--light-gray.overflow-auto.shadow-4.z-1.bg-light-gray(:class="{ collapsed: !sidebarOpen}")
                 #mobile-header.bg-lightest-blue.ma0.pa1
@@ -59,7 +64,16 @@ export default {
     methods: {
       toggleSidebar() {
         this.sidebarOpen = !this.sidebarOpen;
-      }
+      },
+      login() {
+        this.$auth.loginWithRedirect();
+      },
+      logout() {
+        this.$auth.logout({
+          returnTo: window.location.origin
+        })
+      },
+
     }, created() {
         EventBus.$on('select-feature', feature => this.sidebarOpen = true);
     }

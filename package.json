@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.6.0",
     "axios": "^0.19.0",
     "cheap-ruler": "^2.5.1",
     "d3-fetch": "^1.1.2",
