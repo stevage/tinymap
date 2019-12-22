@@ -41,7 +41,6 @@ export default {
     created() {
         window.FeatureInfo = this;
         EventBus.$on('NewFeature-mode', mode => {
-            console.log('moding');
             this.feature = undefined
         });
     },

@@ -9,6 +9,7 @@ import U from 'mapbox-gl-utils';
 import { EventBus } from './EventBus';
 import { getFeatures, layer } from './sharedMapApi';
 import boundingBox from 'geojson-bounding-box';
+import MapboxGeocoder from 'mapbox-gl-geocoder';
 export default {
     data: () => ({
         points: undefined,
@@ -26,6 +27,12 @@ export default {
         U.init(map, mapboxgl);
         window.map = map;
         window.Map = this;
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
 
         map.U.onLoad(async () => {
             map.U.addGeoJSON('points');
@@ -116,6 +123,7 @@ export default {
     },
 }
 import 'mapbox-gl/dist/mapbox-gl.css';
+import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 </script>
 

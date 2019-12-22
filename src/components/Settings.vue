@@ -11,11 +11,11 @@
     template(v-if="!layer && !secretkey")
         h4 Welcome to TinyMap. 
         p To create your own map, just choose these two parameters.
-        label.b.f5.mb0 Layer
+        label.b.f5.mb0 Map ID
         p.dark-gray.f7.i.mv0 A unique string identifying your map.
         input#newlayer.f6.gray(v-model="newLayer" placeholder="awesome-cafes")
 
-        label.b.f5.mt3.db SecretKey
+        label.b.f5.mt3.db Password
         p.dark-gray.f7.i.mv0 Share this with anyone who should be able to edit.
         input#newkey.f7.gray(v-model="newSecretKey" placeholder="l4ttesNbr0wn1es")
 

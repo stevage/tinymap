@@ -16,7 +16,7 @@
             #sidebar-rim.relative.br.bg-light-gray.b--gray.shadow-4.z-1(v-show="!sidebarOpen"  style="width:20px" @click="sidebarOpen = true")
             #map-container.relative.flex-auto
                 Map
-                #sidebarToggle.absolute.bg-light-gray.f3.br.bt.bb.br--right.br-100.b--dark-gray.bw1.mt3.magenta.pointer.grow.pa1.z-1(@click="toggleSidebar")
+                #sidebarToggle.absolute.bg-light-gray.f3.br.bt.bb.br--right.br-100.b--dark-gray.bw1.mt3.magenta.pointer.grow.pa1.z-2(@click="toggleSidebar")
                   span(v-if="!sidebarOpen")
                     .icono-caretRight.ml0
                   span(v-if="sidebarOpen") 
