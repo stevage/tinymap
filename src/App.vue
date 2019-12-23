@@ -4,9 +4,7 @@
             img.logo.mh2(src="butterfly.svg")
             h1.f1.ma1.flex-auto 
                 | TinyMap
-            div(v-if="!$auth.loading")
-              button(v-if="!$auth.isAuthenticated" @click="login") Log in
-              button(v-if="$auth.isAuthenticated" @click="logout") Log out
+            Login
 
             
         #middle.flex.flex-auto
@@ -44,14 +42,15 @@ import FeatureInfo from './components/FeatureInfo.vue'
 import NewFeature from './components/NewFeature.vue'
 import Settings from './components/Settings.vue'
 import { EventBus } from './components/EventBus';
-
+import Login from './components/Login';
 export default {
     name: 'app',
     components: {
       Map,
       FeatureInfo,
       NewFeature,
-      Settings
+      Settings,
+      Login
     },
     data: () => ({
       sidebarOpen: true
@@ -64,14 +63,6 @@ export default {
     methods: {
       toggleSidebar() {
         this.sidebarOpen = !this.sidebarOpen;
-      },
-      login() {
-        this.$auth.loginWithRedirect();
-      },
-      logout() {
-        this.$auth.logout({
-          returnTo: window.location.origin
-        })
       },
 
     }, created() {
